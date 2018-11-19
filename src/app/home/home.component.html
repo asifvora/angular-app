@@ -1,3 +1,7 @@
-<p>
-  home works!
-</p>
+<h1>Home</h1>
+<ul *ngIf="users">
+    <li *ngFor="let user of users">
+        <img [src]="user.avatar" />
+        <p>{{user.first_name}} {{user.last_name}}</p>
+    </li>
+</ul>
