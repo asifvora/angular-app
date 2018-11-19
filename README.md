@@ -2,6 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
 
+![image](https://github.com/asifvora/angular-app/blob/master/screenshot.png)
+
+
 ## Getting Started
 
 For help getting started with Angular, view online
