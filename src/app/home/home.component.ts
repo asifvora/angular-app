@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from './../data.service';
+import { APIService } from './../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +10,10 @@ export class HomeComponent implements OnInit {
 
   users: object;
 
-  constructor(private data: DataService) { }
+  constructor(private API: APIService) { }
 
   ngOnInit() {
-    this.data.getUsers().subscribe(res => {
+    this.API.get().subscribe(res => {
       this.users = res;
     });
   }
