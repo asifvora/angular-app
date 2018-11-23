@@ -6,6 +6,7 @@
     <input type="text" formControlName="email">
     <div *ngIf="submitted && loginForm.controls.email.errors" class="error">
       <div *ngIf="loginForm.controls.email.errors.required">Email is required.</div>
+      <div *ngIf="loginForm.controls.email.errors.invalidEmailAddress">Invalid email address.</div>
     </div>
   </label>
 

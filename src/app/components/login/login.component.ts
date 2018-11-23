@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './../../services/auth/auth.service';
+import { ValidationService } from './../../services/validation/validation.service';
 
 @Component({
   selector: 'app-login',
@@ -15,17 +16,18 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private validationService: ValidationService
   ) {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', Validators.compose([Validators.required, validationService.emailValidator])],
       password: ['', Validators.required]
     })
   }
 
   onSubmit() {
     this.submitted = true;
-
+  console.log('loginForm.controls.email.errors',this.loginForm.controls.email.errors)
     if (this.loginForm.invalid) {
       return;
     }
