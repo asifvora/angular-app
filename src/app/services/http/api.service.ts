@@ -1,29 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class APIService {
 
-  private baseURL = `https://reqres.in/api/users`;
+  private baseURL = environment.baseURL;
 
   constructor(private http: HttpClient) { }
 
-  get() {
-    return this.http.get(this.baseURL);
+  get(path) {
+    return this.http.get(`${this.baseURL}${path}`);
   }
 
-  post() {
-    return this.http.post(this.baseURL, JSON.stringify({}));
+  post(path) {
+    return this.http.post(`${this.baseURL}${path}`, JSON.stringify({}));
   }
 
-  put() {
-    return this.http.put(this.baseURL, JSON.stringify({}));
+  put(path) {
+    return this.http.put(`${this.baseURL}${path}`, JSON.stringify({}));
   }
 
-  delete() {
-    return this.http.delete(this.baseURL);
+  delete(path) {
+    return this.http.delete(`${this.baseURL}${path}`);
   }
 
 }

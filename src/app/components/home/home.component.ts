@@ -1,5 +1,5 @@
+import { UserService } from './../../services/user/user.service';
 import { Component, OnInit } from '@angular/core';
-import { APIService } from '../../services/http/api.service';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +11,11 @@ export class HomeComponent implements OnInit {
   users: object;
   isLoading: boolean = false;
 
-  constructor(private API: APIService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.isHandleLoading(true);
-    this.API.get().subscribe(
+    this.userService.getUsers().subscribe(
       response => {
         this.users = response;
         this.isHandleLoading(false);
