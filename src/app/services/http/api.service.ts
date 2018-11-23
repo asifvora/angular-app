@@ -14,8 +14,8 @@ export class APIService {
     return this.http.get(`${this.baseURL}${path}`);
   }
 
-  post(path) {
-    return this.http.post(`${this.baseURL}${path}`, JSON.stringify({}));
+  post(path, data) {
+    return this.http.post(`${this.baseURL}${path}`, JSON.stringify(data));
   }
 
   put(path) {
