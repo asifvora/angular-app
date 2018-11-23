@@ -1,7 +1,7 @@
-import { ContactComponent } from './contact/contact.component';
-import { AboutComponent } from './about/about.component';
-import { HomeComponent } from './home/home.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { ContactComponent } from '../components/contact/contact.component';
+import { AboutComponent } from '../components/about/about.component';
+import { HomeComponent } from '../components/home/home.component';
+import { NotFoundComponent } from '../components/not-found/not-found.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

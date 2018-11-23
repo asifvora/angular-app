@@ -15,14 +15,15 @@ export class APIService {
   }
 
   post() {
-    return this.http.post(this.baseURL, {});
+    return this.http.post(this.baseURL, JSON.stringify({}));
   }
 
   put() {
-    return this.http.put(this.baseURL, {});
+    return this.http.put(this.baseURL, JSON.stringify({}));
   }
 
   delete() {
     return this.http.delete(this.baseURL);
   }
+
 }

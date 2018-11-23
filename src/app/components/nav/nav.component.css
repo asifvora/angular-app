@@ -26,6 +26,9 @@ header nav ul li a {
     font-size: 0.8em;
 }
 
+header nav ul li a.active {
+    background: #8E2BFF;
+}
 header nav ul li a:hover {
     background: #8E2BFF;
 }
