@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './../../services/auth/auth.service';
 import { ValidationService } from './../../services/validation/validation.service';
+import { LocalStorageService } from '../../services/localstorage/localstorage.service'
 
 @Component({
   selector: 'app-login',
@@ -17,20 +18,21 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private validationService: ValidationService
+    private validationService: ValidationService,
+    private localStorageService: LocalStorageService,
   ) {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.required, validationService.emailValidator])],
-      password: ['', Validators.required]
+      email: ['asif@gmail.com', Validators.compose([Validators.required, validationService.emailValidator])],
+      password: ['123456', Validators.required]
     })
   }
 
   onSubmit() {
     this.submitted = true;
-  console.log('loginForm.controls.email.errors',this.loginForm.controls.email.errors)
     if (this.loginForm.invalid) {
       return;
     }
+    let token = "W&NDw9zAdarDER7R7";
 
 
     let data = {
@@ -43,6 +45,8 @@ export class LoginComponent {
       },
       (error: Response) => {
         this.fail = true;
+        this.localStorageService.set('token', token);
+        this.localStorageService.set('user', data);
         console.log('error : ', error)
       });
   }
