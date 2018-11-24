@@ -11,16 +11,21 @@
           <a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
           true}">About</a>
         </li>
-        <li>
+        <li *ngIf="isAuthCheck()">
           <a routerLink="/contact" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
           true}">
             Contact us
           </a>
         </li>
-        <li>
+        <li *ngIf="!isAuthCheck()">
           <a routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
             true}">
             Login
+          </a>
+        </li>
+        <li *ngIf="isAuthCheck()">
+          <a (click)="logOut()">
+            LogOut
           </a>
         </li>
       </ul>

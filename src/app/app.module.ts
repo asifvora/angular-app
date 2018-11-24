@@ -12,8 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { LoginComponent } from './components/login/login.component';
-import { AuthGuardService as AuthGuard } from './services/auth/auth-guard.service';
-
+import { AuthGuard } from './guard/auth.guard';
 
 @NgModule({
   declarations: [

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './../../services/auth/auth.service';
 import { ValidationService } from './../../services/validation/validation.service';
 import { LocalStorageService } from '../../services/localstorage/localstorage.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private validationService: ValidationService,
     private localStorageService: LocalStorageService,
+    public router: Router
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['asif@gmail.com', Validators.compose([Validators.required, validationService.emailValidator])],
@@ -33,12 +35,11 @@ export class LoginComponent {
       return;
     }
     let token = "W&NDw9zAdarDER7R7";
-
-
     let data = {
       email: this.loginForm.controls.email.value,
       password: this.loginForm.controls.password.value,
     }
+
     this.authService.login(data).subscribe(
       response => {
         console.log('response : ', response)
@@ -47,6 +48,7 @@ export class LoginComponent {
         this.fail = true;
         this.localStorageService.set('token', token);
         this.localStorageService.set('user', data);
+        this.router.navigate(['/']);
         console.log('error : ', error)
       });
   }
