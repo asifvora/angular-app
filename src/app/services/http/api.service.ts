@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 })
 export class APIService {
 
-  private baseURL = environment.baseURL;
+  private baseURL = environment.API_END_URL;
 
   constructor(private http: HttpClient) { }
 
