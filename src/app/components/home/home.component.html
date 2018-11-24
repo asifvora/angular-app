@@ -1,4 +1,5 @@
-<h1>Home</h1>
+<h1>Home</h1> <p *ngIf="currentUser && currentUser.role">Your role is: <strong>{{currentUser.role}}</strong>.</p>
+
 <ul *ngIf="users">
     <li *ngFor="let user of users.data">
         <img [src]="user.avatar" />

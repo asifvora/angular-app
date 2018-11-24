@@ -17,6 +17,12 @@
             Contact us
           </a>
         </li>
+        <li *ngIf="isAdmin()">
+          <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+          true}">
+            Admin
+          </a>
+        </li>
         <li *ngIf="!isAuthCheck()">
           <a routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
             true}">

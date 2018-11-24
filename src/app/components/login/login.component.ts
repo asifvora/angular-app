@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './../../services/auth/auth.service';
 import { ValidationService } from './../../services/validation/validation.service';
@@ -23,8 +23,15 @@ export class LoginComponent {
     private localStorageService: LocalStorageService,
     public router: Router
   ) {
+    // redirect to home if already logged in
+    if (this.authService.currentUserValue) {
+      this.router.navigate(['/']);
+    }
+  }
+
+  ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['asif@gmail.com', Validators.compose([Validators.required, validationService.emailValidator])],
+      email: ['asif@gmail.com', Validators.compose([Validators.required, this.validationService.emailValidator])],
       password: ['123456', Validators.required]
     })
   }
@@ -38,6 +45,7 @@ export class LoginComponent {
     let data = {
       email: this.loginForm.controls.email.value,
       password: this.loginForm.controls.password.value,
+      role: 'Admin'
     }
 
     this.authService.login(data).subscribe(
@@ -48,6 +56,7 @@ export class LoginComponent {
         this.fail = true;
         this.localStorageService.set('token', token);
         this.localStorageService.set('user', data);
+        this.authService.currentUserSubjectNext(data);
         this.router.navigate(['/']);
         console.log('error : ', error)
       });

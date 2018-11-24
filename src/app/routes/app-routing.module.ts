@@ -7,7 +7,11 @@ import { AboutComponent } from '../components/about/about.component';
 import { HomeComponent } from '../components/home/home.component';
 import { NotFoundComponent } from '../components/not-found/not-found.component';
 import { LoginComponent } from '../components/login/login.component';
+import { AdminComponent } from '../components/admin/admin.component';
+
 import { AuthGuard } from './../guard/auth.guard';
+import { Role } from './../models/role';
+import { from } from 'rxjs';
 
 const routes: Routes = [
   {
@@ -16,7 +20,13 @@ const routes: Routes = [
   },
   {
     path: 'about',
-    component: AboutComponent
+    component: AboutComponent,
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    data: { roles: [Role.Admin] },
+    canActivate: [AuthGuard]
   },
   {
     path: 'contact',

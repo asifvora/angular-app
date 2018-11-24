@@ -29,8 +29,12 @@ export class NavComponent implements OnInit {
   }
 
   logOut() {
-    this.localStorageService.clear();
+    this.auth.logout();
     this.router.navigate(['login']);
+  }
+
+  isAdmin() {
+    return this.auth.isAdmin;
   }
 
 }
