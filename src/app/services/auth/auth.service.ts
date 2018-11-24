@@ -31,7 +31,7 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  get isAdmin() {
+  public get isAdmin() {
     let user = this.currentUserSubject.value;
     return user && user.role === Role.Admin ? true : false;
   }

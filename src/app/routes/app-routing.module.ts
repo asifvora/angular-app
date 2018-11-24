@@ -11,7 +11,6 @@ import { AdminComponent } from '../components/admin/admin.component';
 
 import { AuthGuard } from './../guard/auth.guard';
 import { Role } from './../models/role';
-import { from } from 'rxjs';
 
 const routes: Routes = [
   {
