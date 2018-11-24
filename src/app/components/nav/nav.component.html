@@ -29,6 +29,12 @@
             Login
           </a>
         </li>
+        <li *ngIf="!isAuthCheck()">
+          <a routerLink="/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+            true}">
+            Register
+          </a>
+        </li>
         <li *ngIf="isAuthCheck()">
           <a (click)="logOut()">
             LogOut
