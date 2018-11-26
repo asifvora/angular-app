@@ -5,7 +5,7 @@ import { ValidationService } from './../../services/validation/validation.servic
 import { LocalStorageService } from '../../services/localstorage/localstorage.service'
 import { Router } from '@angular/router';
 import { Role } from '../../models/role';
-import { AuthService as SocialAuthService, SocialUser, GoogleLoginProvider } from "angularx-social-login";
+import { AuthService as SocialAuthService, GoogleLoginProvider } from "angularx-social-login";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,6 @@ export class LoginComponent {
   loginForm: FormGroup;
   submitted = false;
   fail = false;
-  private user: SocialUser;
 
   constructor(
     private authService: AuthService,
@@ -39,10 +38,24 @@ export class LoginComponent {
       password: ['123456', Validators.required]
     });
     this.socialAuthService.authState.subscribe((user) => {
-      this.user = user;
-      console.log('google', user)
+      if (user) {
+        let { authToken } = user;
+        let data = {
+          ...user,
+          isSocial: true,
+          role: Role.User
+        }
+        this.localStorageService.set('token', authToken);
+        this.localStorageService.set('user', data);
+        this.authService.currentUserSubjectNext(data);
+        this.router.navigate(['/']);
+      } else {
+        this.socialAuthService.signOut();
+        this.authService.logout();
+      }
     });
   }
+
 
   onSubmit() {
     this.submitted = true;
@@ -53,6 +66,7 @@ export class LoginComponent {
     let data = {
       email: this.loginForm.controls.email.value,
       password: this.loginForm.controls.password.value,
+      isSocial: false,
       role: Role.User
     }
 
@@ -71,7 +85,6 @@ export class LoginComponent {
   }
 
   googleLogin(): void {
-    console.log('googleLogin')
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 

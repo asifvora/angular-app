@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { AuthService as SocialAuthService } from "angularx-social-login";
 import { LocalStorageService } from './../../services/localstorage/localstorage.service';
 import * as moduleTypes from '../../models/moduleTypes';
 
@@ -17,8 +17,8 @@ export class NavComponent {
 
   constructor(
     public auth: AuthService,
+    private socialAuthService: SocialAuthService,
     public localStorageService: LocalStorageService,
-    public router: Router,
   ) {
     this.auth.currentUser.subscribe(x => this.currentUser = x);
   }
@@ -31,9 +31,13 @@ export class NavComponent {
     return this.auth.isHasRole(moduleType);
   }
 
-  logOut() {
-    this.auth.logout();
-    this.router.navigate(['login']);
+  logOut(){
+    if (this.currentUser.isSocial) {
+      this.socialAuthService.signOut();
+      this.auth.logout();
+    } else {
+      this.auth.logout();
+    }
   }
-
+  
 }
