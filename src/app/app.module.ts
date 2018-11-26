@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 
 import { AppRoutingModule } from './routes/app-routing.module';
 import { AppComponent } from './components/app/app.component';
@@ -15,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guard/auth.guard';
 import { AdminComponent } from './components/admin/admin.component';
 import { RegisterComponent } from './components/register/register.component';
+import { provideConfig } from '../app/services/auth/social-auth.service'
 
 @NgModule({
   declarations: [
@@ -33,9 +35,13 @@ import { RegisterComponent } from './components/register/register.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SocialLoginModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, {
+    provide: AuthServiceConfig,
+    useFactory: provideConfig
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
