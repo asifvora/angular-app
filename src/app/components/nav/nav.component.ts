@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { LocalStorageService } from './../../services/localstorage/localstorage.service';
+import { ModuleUser } from './../../models/moduleUser';
 
 @Component({
   selector: 'app-nav',
@@ -25,8 +26,18 @@ export class NavComponent {
     return this.auth.isAuthenticated;
   }
 
-  get isHasRole() {
-    return this.auth.isHasRole;
+  isHasRole(moduleType) {
+    if (this.isAuthenticated) {
+      let role = this.currentUser && this.currentUser.role ? this.currentUser.role : null;
+      switch (moduleType) {
+        case 'AdminModule':
+          return ModuleUser.AdminModule.includes(role) ? true : false;
+        default:
+          return false;
+      }
+    } else {
+      return false;
+    }
   }
 
   logOut() {

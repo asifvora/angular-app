@@ -11,7 +11,7 @@ import { RegisterComponent } from './../components/register/register.component';
 import { AdminComponent } from '../components/admin/admin.component';
 
 import { AuthGuard } from './../guard/auth.guard';
-import { Role } from './../models/role';
+import { ModuleUser } from './../models/moduleUser';
 
 const routes: Routes = [
   {
@@ -25,7 +25,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    data: { roles: [Role.Admin,'Admin123'] },
+    data: { roles: ModuleUser.AdminModule },
     canActivate: [AuthGuard]
   },
   {

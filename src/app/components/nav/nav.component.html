@@ -17,7 +17,7 @@
             Contact us
           </a>
         </li>
-        <li *ngIf="isHasRole">
+        <li *ngIf="isHasRole('AdminModule')">
           <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
           true}">
             Admin
