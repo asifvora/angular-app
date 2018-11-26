@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { LocalStorageService } from './../../services/localstorage/localstorage.service';
-import { ModuleUser } from './../../models/moduleUser';
+import * as moduleTypes from '../../models/moduleTypes';
 
 @Component({
   selector: 'app-nav',
@@ -13,6 +13,7 @@ export class NavComponent {
 
   appTitle: string = 'Angular App';
   currentUser: any;
+  adminModule = moduleTypes.ADMIN_MODULE;
 
   constructor(
     public auth: AuthService,
@@ -27,17 +28,7 @@ export class NavComponent {
   }
 
   isHasRole(moduleType) {
-    if (this.isAuthenticated) {
-      let role = this.currentUser && this.currentUser.role ? this.currentUser.role : null;
-      switch (moduleType) {
-        case 'AdminModule':
-          return ModuleUser.AdminModule.includes(role) ? true : false;
-        default:
-          return false;
-      }
-    } else {
-      return false;
-    }
+    return this.auth.isHasRole(moduleType);
   }
 
   logOut() {

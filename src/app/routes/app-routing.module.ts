@@ -12,6 +12,7 @@ import { AdminComponent } from '../components/admin/admin.component';
 
 import { AuthGuard } from './../guard/auth.guard';
 import { ModuleUser } from './../models/moduleUser';
+import { ADMIN_MODULE } from './../models/moduleTypes';
 
 const routes: Routes = [
   {
