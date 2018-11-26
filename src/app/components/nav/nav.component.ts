@@ -1,40 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { LocalStorageService } from './../../services/localstorage/localstorage.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.css'],
 })
-export class NavComponent implements OnInit {
+export class NavComponent {
 
   appTitle: string = 'Angular App';
-  isAuth: boolean = false;
+  currentUser: any;
 
   constructor(
     public auth: AuthService,
     public localStorageService: LocalStorageService,
-    public router: Router
-  ) { }
-
-  ngOnInit() {
-    this.isAuth = this.auth.isAuthenticated();
+    public router: Router,
+  ) {
+    this.auth.currentUser.subscribe(x => this.currentUser = x);
   }
 
-  isAuthCheck() {
-    this.isAuth = this.auth.isAuthenticated();
-    return this.isAuth;
+  get isAuthenticated() {
+    return this.auth.isAuthenticated;
+  }
+
+  get isHasRole() {
+    return this.auth.isHasRole;
   }
 
   logOut() {
     this.auth.logout();
     this.router.navigate(['login']);
-  }
-
-  isAdmin() {
-    return this.auth.isAdmin;
   }
 
 }

@@ -1,29 +1,34 @@
 import { Injectable } from '@angular/core';
+import { Router, RoutesRecognized } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { APIService } from '../http/api.service';
 import { LocalStorageService } from '../localstorage/localstorage.service';
-import { Role } from '../../models/role';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthService {
 
-  private currentUserSubject: BehaviorSubject<any>;
+  public currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
+  public routeData: any;
 
   constructor(
     private API: APIService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private router: Router,
   ) {
     this.currentUserSubject = new BehaviorSubject<any>(this.localStorageService.get('user'));
     this.currentUser = this.currentUserSubject.asObservable();
+    this.router.events.subscribe((data) => {
+      if (data instanceof RoutesRecognized) {
+        this.routeData = data.state.root.firstChild.data;
+      }
+    });
   }
 
-  public isAuthenticated(): boolean {
+  public get isAuthenticated(): boolean {
     const token = this.localStorageService.get('token');
-    // true or false
     return token ? true : false;
   }
 
@@ -31,9 +36,16 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  public get isAdmin() {
-    let user = this.currentUserSubject.value;
-    return user && user.role === Role.Admin ? true : false;
+  public get isHasRole(): boolean {
+    let user = this.currentUserValue;
+    if (this.isAuthenticated) {
+      if (user && user.role && this.routeData && this.routeData.roles && this.routeData.roles.indexOf(user.role) === -1) {
+        return false;
+      }
+      return true;
+    } else {
+      return false;
+    }
   }
 
   currentUserSubjectNext(value): any {

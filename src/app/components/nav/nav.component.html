@@ -11,31 +11,31 @@
           <a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
           true}">About</a>
         </li>
-        <li *ngIf="isAuthCheck()">
+        <li *ngIf="isAuthenticated">
           <a routerLink="/contact" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
           true}">
             Contact us
           </a>
         </li>
-        <li *ngIf="isAdmin()">
+        <li *ngIf="isHasRole">
           <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
           true}">
             Admin
           </a>
         </li>
-        <li *ngIf="!isAuthCheck()">
+        <li *ngIf="!isAuthenticated">
           <a routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
             true}">
             Login
           </a>
         </li>
-        <li *ngIf="!isAuthCheck()">
+        <li *ngIf="!isAuthenticated">
           <a routerLink="/register" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
             true}">
             Register
           </a>
         </li>
-        <li *ngIf="isAuthCheck()">
+        <li *ngIf="isAuthenticated">
           <a (click)="logOut()">
             LogOut
           </a>

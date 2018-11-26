@@ -4,6 +4,7 @@ import { AuthService } from './../../services/auth/auth.service';
 import { ValidationService } from './../../services/validation/validation.service';
 import { LocalStorageService } from '../../services/localstorage/localstorage.service'
 import { Router } from '@angular/router';
+import { Role } from '../../models/role';
 
 @Component({
   selector: 'app-login',
@@ -45,7 +46,7 @@ export class LoginComponent {
     let data = {
       email: this.loginForm.controls.email.value,
       password: this.loginForm.controls.password.value,
-      role: 'Admin'
+      role: Role.User
     }
 
     this.authService.login(data).subscribe(
