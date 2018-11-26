@@ -11,8 +11,8 @@ import { RegisterComponent } from './../components/register/register.component';
 import { AdminComponent } from '../components/admin/admin.component';
 
 import { AuthGuard } from './../guard/auth.guard';
+import { LoginGuard } from './../guard/login.guard';
 import { ModuleUser } from './../models/moduleUser';
-import { ADMIN_MODULE } from './../models/moduleTypes';
 
 const routes: Routes = [
   {
@@ -36,10 +36,12 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [LoginGuard],
     component: LoginComponent,
   },
   {
     path: 'register',
+    canActivate: [LoginGuard],
     component: RegisterComponent,
   },
   {
