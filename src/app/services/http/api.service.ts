@@ -1,21 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { environment as production } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class APIService {
 
-  private baseURL = environment.API_END_URL || production.API_END_URL;
+  private baseURL = environment.API_END_URL;
 
-  constructor(private http: HttpClient) {
-    console.log('baseURL', this.baseURL)
-    console.log('development : ', environment.API_END_URL)
-    console.log('production : ', production.API_END_URL)
-  }
-
+  constructor(private http: HttpClient) { }
 
   get(path) {
     return this.http.get(`${this.baseURL}${path}`);
