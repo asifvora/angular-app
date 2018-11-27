@@ -16,7 +16,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guard/auth.guard';
 import { AdminComponent } from './components/admin/admin.component';
 import { RegisterComponent } from './components/register/register.component';
-import { provideConfig } from '../app/services/auth/social-auth.service'
+import { provideConfig } from '../app/services/auth/social-auth.service';
+import { BooksComponent } from './components/books/books.component'
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { provideConfig } from '../app/services/auth/social-auth.service'
     LoaderComponent,
     LoginComponent,
     AdminComponent,
-    RegisterComponent
+    RegisterComponent,
+    BooksComponent
   ],
   imports: [
     BrowserModule,

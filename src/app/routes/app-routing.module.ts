@@ -9,6 +9,7 @@ import { NotFoundComponent } from '../components/not-found/not-found.component';
 import { LoginComponent } from '../components/login/login.component';
 import { RegisterComponent } from './../components/register/register.component';
 import { AdminComponent } from '../components/admin/admin.component';
+import { BooksComponent } from './../components/books/books.component';
 
 import { AuthGuard } from './../guard/auth.guard';
 import { LoginGuard } from './../guard/login.guard';
@@ -32,6 +33,11 @@ const routes: Routes = [
   {
     path: 'contact',
     component: ContactComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'books',
+    component: BooksComponent,
     canActivate: [AuthGuard]
   },
   {

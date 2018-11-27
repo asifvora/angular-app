@@ -31,7 +31,12 @@ export class AuthService {
 
   public get isAuthenticated(): boolean {
     const token = this.localStorageService.get('token');
-    return token ? true : false;
+    if (token) {
+      return true;
+    } else {
+      this.currentUserSubjectNext(null);
+      return false;
+    }
   }
 
   public get currentUserValue(): any {

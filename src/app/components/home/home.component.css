@@ -83,7 +83,7 @@ h6 {
 
 .card-img-top {
     border-radius: 50%;
-    width: 50%;    
+    width: 50%;
     align-self: center;
 }
 
@@ -96,4 +96,16 @@ h6 {
     padding: 1em;
     cursor: pointer;
     font-family: "Montserrat";
+}
+
+.div-head {
+    display: inline-block;
+    width: 100%;
+}
+.div-head div{
+    float: left;
+}
+.div-head .add-div{
+    float: right;
+    margin-top: 22px;
 }

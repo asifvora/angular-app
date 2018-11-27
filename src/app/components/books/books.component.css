@@ -1,0 +1,61 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    background: #eeeeee;
+    padding: 2em;
+    border-radius: 4px;
+    margin-bottom: 7px;
+    display: grid;
+    grid-template-columns: 60px auto;
+}
+
+ul li p {
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+ul li img {
+    border-radius: 50%;
+    width: 100%;
+}
+
+.bg-transparent {
+    background-color: transparent;
+}
+
+:host {
+    height: 100%;
+}
+
+.photo {
+    object-fit: contain;
+}
+
+.cta {
+    background: #7700FF;
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 1em;
+    cursor: pointer;
+    font-family: "Montserrat";
+}
+
+.div-head {
+    display: inline-block;
+    width: 100%;
+}
+
+.div-head div {
+    float: left;
+}
+
+.div-head .add-div {
+    float: right;
+    margin-top: 22px;
+}

@@ -1,6 +1,5 @@
 <h1>Home</h1>
-<p *ngIf="currentUser && currentUser.role">Your role is: <strong>{{currentUser.role}}</strong>.</p>
-<div *ngIf="currentUser && currentUser.isSocial" class="card text-center">
+<div *ngIf="isAuthenticated && currentUser && currentUser.isSocial" class="card text-center">
     <h6 class="card-header">
         Social Login
     </h6>
@@ -9,21 +8,23 @@
     <div class="card-block">
         <h4 class="card-title">{{ currentUser.name }}</h4>
         <p class="card-text">{{ currentUser.email }}</p>
+        <p class="card-text">{{ currentUser.role }}</p>
     </div>
     <div class="card-block">
         <button class="cta" (click)="logOut()">LogOut</button>
     </div>
 </div>
-<br />
-<ul *ngIf="books">
-    <li *ngFor="let book of books">
-        <img src="https://lh4.googleusercontent.com/-Sqbs1hyvhXA/AAAAAAAAAAI/AAAAAAAAADM/10JVNcs8g6k/s96-c/photo.jpg" />
-        <p>{{book.author}}</p>
-        <div> </div>
-        <div>
-            <p>{{book.title}}</p>
-        </div>
-    </li>
-</ul>
-
-<app-loader *ngIf="isLoading"></app-loader>
+<div *ngIf="isAuthenticated && currentUser && !currentUser.isSocial" class="card text-center">
+    <h6 class="card-header">
+        Site Login
+    </h6>
+    <div class="card-block"></div>
+    <div class="card-block">
+        <h4 class="card-title">{{ currentUser.name }}</h4>
+        <p class="card-text">{{ currentUser.email }}</p>
+        <p class="card-text">{{ currentUser.role }}</p>
+    </div>
+    <div class="card-block">
+        <button class="cta" (click)="logOut()">LogOut</button>
+    </div>  
+</div>

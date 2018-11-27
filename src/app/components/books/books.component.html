@@ -1,0 +1,19 @@
+<div class="div-head">
+  <div>
+    <h1>Books</h1>
+  </div>
+  <div class="add-div">
+    <button class="cta" (click)="addBook()">Add Book</button>
+  </div>
+</div>
+<ul *ngIf="books">
+  <li *ngFor="let book of books">
+    <img src="https://lh4.googleusercontent.com/-Sqbs1hyvhXA/AAAAAAAAAAI/AAAAAAAAADM/10JVNcs8g6k/s96-c/photo.jpg" />
+    <p>{{book.author}}</p>
+    <div> </div>
+    <div>
+      <p>{{book.title}}</p>
+    </div>
+  </li>
+</ul>
+<app-loader *ngIf="isLoading"></app-loader>

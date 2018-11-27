@@ -67,7 +67,7 @@ export class LoginComponent {
     let data = {
       email,
       isSocial: false,
-      role: Role.User
+      role: Role.Admin
     }
     this.localStorageService.set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9');
     this.localStorageService.set('user', data);

@@ -7,6 +7,10 @@
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
           true}">Home</a>
         </li>
+        <li *ngIf="isAuthenticated">
+          <a routerLink="/books" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+          true}">Books</a>
+        </li>
         <li>
           <a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
           true}">About</a>

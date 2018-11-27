@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { BooksService } from './../../services/books/books.service';
+import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { AuthService as SocialAuthService } from "angularx-social-login";
 
@@ -8,38 +7,21 @@ import { AuthService as SocialAuthService } from "angularx-social-login";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
   currentUser: any;
-  books: any;
-  isLoading: boolean = false;
 
   constructor(
-    private booksService: BooksService,
     public auth: AuthService,
     private socialAuthService: SocialAuthService,
   ) {
     this.auth.currentUser.subscribe(x => this.currentUser = x);
   }
-
-  ngOnInit() {
-    this.isHandleLoading(true);
-    this.booksService.getBooks().subscribe(
-      response => {
-        console.log('response,response', response)
-        this.books = response;
-        this.isHandleLoading(false);
-      },
-      (error: Response) => {
-        this.isHandleLoading(false);
-        console.log('error : ', error)
-      });
+  
+  get isAuthenticated() {
+    return this.auth.isAuthenticated;
   }
-
-  isHandleLoading(status) {
-    return this.isLoading = status;
-  }
-
+  
   logOut() {
     if (this.currentUser.isSocial) {
       this.socialAuthService.signOut().then(() => {
