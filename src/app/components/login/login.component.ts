@@ -15,8 +15,9 @@ import { AuthService as SocialAuthService, GoogleLoginProvider } from "angularx-
 export class LoginComponent {
 
   loginForm: FormGroup;
+  loginError: String;
   submitted = false;
-  fail = false;
+  loginFailed = false;
 
   constructor(
     private authService: AuthService,
@@ -34,7 +35,7 @@ export class LoginComponent {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['asif@gmail.com', Validators.compose([Validators.required, this.validationService.emailValidator])],
+      email: ['asif.vora@multiots.com', [Validators.required, this.validationService.emailValidator]],
       password: ['123456', Validators.required]
     });
     this.socialAuthService.authState.subscribe((user) => {
@@ -53,32 +54,44 @@ export class LoginComponent {
     });
   }
 
+  get f() { return this.loginForm.controls; }
 
   onSubmit() {
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
     }
-    let token = "W&NDw9zAdarDER7R7";
+    let email = this.loginForm.controls.email.value;
+    // let password = this.loginForm.controls.password.value;
+    // let user = { email, password }
     let data = {
-      email: this.loginForm.controls.email.value,
-      password: this.loginForm.controls.password.value,
+      email,
       isSocial: false,
       role: Role.User
     }
-
-    this.authService.login(data).subscribe(
-      response => {
-        console.log('response : ', response)
-      },
-      (error: Response) => {
-        this.fail = true;
-        this.localStorageService.set('token', token);
-        this.localStorageService.set('user', data);
-        this.authService.currentUserSubjectNext(data);
-        this.router.navigate(['/']);
-        console.log('error : ', error)
-      });
+    this.localStorageService.set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9');
+    this.localStorageService.set('user', data);
+    this.authService.currentUserSubjectNext(data);
+    this.router.navigate(['/']);
+    // this.authService.login(user).subscribe(
+    //   (response: any) => {
+    //     console.log('response : ', response)
+    //     let { token } = response;
+    //     let data = {
+    //       ...response,
+    //       isSocial: false,
+    //       role: Role.User
+    //     }
+    //     this.localStorageService.set('token', token);
+    //     this.localStorageService.set('user', data);
+    //     this.authService.currentUserSubjectNext(data);
+    //     this.router.navigate(['/']);
+    //   },
+    //   (error: any) => {
+    //     this.loginFailed = true;
+    //     this.loginError = 'Invalid email or password.';
+    //     console.log('error', error)
+    //   });
   }
 
   googleLogin(): void {

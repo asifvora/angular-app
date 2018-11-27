@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API_END_URL: 'https://reqres.in/api/'
+  API_END_URL: 'https://quiet-sands-79740.herokuapp.com/api/'
+  // API_END_URL: 'https://reqres.in/api/'
 };
 
 /*

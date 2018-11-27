@@ -70,7 +70,7 @@ export class AuthService {
   }
 
   login(data) {
-    return this.API.post(`login`, data);
+    return this.API.post('auth/login', data);
   }
 
   logout() {

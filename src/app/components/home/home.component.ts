@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './../../services/user/user.service';
+import { BooksService } from './../../services/books/books.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { AuthService as SocialAuthService } from "angularx-social-login";
 
@@ -11,11 +11,11 @@ import { AuthService as SocialAuthService } from "angularx-social-login";
 export class HomeComponent implements OnInit {
 
   currentUser: any;
-  users: object;
+  books: any;
   isLoading: boolean = false;
 
   constructor(
-    private userService: UserService,
+    private booksService: BooksService,
     public auth: AuthService,
     private socialAuthService: SocialAuthService,
   ) {
@@ -24,9 +24,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.isHandleLoading(true);
-    this.userService.getUsers().subscribe(
+    this.booksService.getBooks().subscribe(
       response => {
-        this.users = response;
+        console.log('response,response', response)
+        this.books = response;
         this.isHandleLoading(false);
       },
       (error: Response) => {
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit {
         console.log('error : ', error)
       });
   }
-  
+
   isHandleLoading(status) {
     return this.isLoading = status;
   }

@@ -4,12 +4,11 @@ import { APIService } from '../http/api.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class BooksService {
 
   constructor(private API: APIService) { }
 
-  getUsers() {
+  getBooks() {
     return this.API.get('books');
   }
-
 }

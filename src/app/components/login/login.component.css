@@ -10,7 +10,7 @@ label textarea {
     padding: 1em;
 }
 
-label .error {
+label .error1 {
     margin-top: -20px;
     background: yellow;
     padding: 0.5em;
@@ -28,6 +28,11 @@ label .error {
     padding: 1em;
     cursor: pointer;
     font-family: "Montserrat";
+}
+
+.error {
+    color: red;
+    padding-bottom: 3px;
 }
 
 .results {
