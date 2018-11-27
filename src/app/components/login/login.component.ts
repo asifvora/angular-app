@@ -16,8 +16,8 @@ export class LoginComponent {
 
   loginForm: FormGroup;
   loginError: String;
-  submitted = false;
-  loginFailed = false;
+  submitted: boolean = false;
+  loginFailed: boolean = false;
 
   constructor(
     private authService: AuthService,

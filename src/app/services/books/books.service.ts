@@ -11,4 +11,8 @@ export class BooksService {
   getBooks() {
     return this.API.get('books');
   }
+
+  addBook(data) {
+    return this.API.post('books', data);
+  }
 }
