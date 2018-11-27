@@ -9,7 +9,13 @@ import { environment as production } from '../../../environments/environment.pro
 export class APIService {
 
   private baseURL = environment.API_END_URL || production.API_END_URL;
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+    console.log('baseURL', this.baseURL)
+    console.log('development : ', environment.API_END_URL)
+    console.log('production : ', production.API_END_URL)
+  }
+
 
   get(path) {
     return this.http.get(`${this.baseURL}${path}`);
