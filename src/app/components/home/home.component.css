@@ -22,3 +22,30 @@ ul li img {
     border-radius: 50%;
     width: 100%;
 }
+
+.bg-transparent {
+    background-color: transparent;
+}
+
+:host {
+    height: 100%;
+}
+
+.photo {
+    object-fit: contain;
+}
+
+.card {
+    width: 20rem;
+    margin: 0 auto;
+}
+.cta {
+    background: #7700FF;
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 1em;
+    cursor: pointer;
+    font-family: "Montserrat";
+}

@@ -49,9 +49,6 @@ export class LoginComponent {
         this.localStorageService.set('user', data);
         this.authService.currentUserSubjectNext(data);
         this.router.navigate(['/']);
-      } else {
-        this.socialAuthService.signOut();
-        this.authService.logout();
       }
     });
   }

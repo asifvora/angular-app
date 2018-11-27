@@ -3,6 +3,9 @@ import { AuthService } from '../../services/auth/auth.service';
 import { AuthService as SocialAuthService } from "angularx-social-login";
 import { LocalStorageService } from './../../services/localstorage/localstorage.service';
 import * as moduleTypes from '../../models/moduleTypes';
+import 'core-js/es6/promise';
+import 'zone.js';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
@@ -31,13 +34,14 @@ export class NavComponent {
     return this.auth.isHasRole(moduleType);
   }
 
-  logOut(){
+  logOut() {
     if (this.currentUser.isSocial) {
-      this.socialAuthService.signOut();
-      this.auth.logout();
+      this.socialAuthService.signOut().then(() => {
+        this.auth.logout();
+      });
     } else {
       this.auth.logout();
     }
   }
-  
+
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './../../services/user/user.service';
 import { AuthService } from '../../services/auth/auth.service';
+import { AuthService as SocialAuthService } from "angularx-social-login";
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private userService: UserService,
     public auth: AuthService,
+    private socialAuthService: SocialAuthService,
   ) {
     this.auth.currentUser.subscribe(x => this.currentUser = x);
   }
@@ -35,6 +37,16 @@ export class HomeComponent implements OnInit {
   
   isHandleLoading(status) {
     return this.isLoading = status;
+  }
+
+  logOut() {
+    if (this.currentUser.isSocial) {
+      this.socialAuthService.signOut().then(() => {
+        this.auth.logout();
+      });
+    } else {
+      this.auth.logout();
+    }
   }
 
 }
