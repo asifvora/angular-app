@@ -19,7 +19,9 @@ import { AdminComponent } from './components/admin/admin.component';
 import { RegisterComponent } from './components/register/register.component';
 import { provideConfig } from '../app/services/auth/social-auth.service';
 import { BooksComponent } from './components/books/books.component';
-import { DialogComponent } from './components/dialog/dialog.component'
+import { DialogComponent } from './components/dialog/dialog.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment'
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { DialogComponent } from './components/dialog/dialog.component'
     ReactiveFormsModule,
     HttpClientModule,
     SocialLoginModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AuthGuard, {
     provide: AuthServiceConfig,
